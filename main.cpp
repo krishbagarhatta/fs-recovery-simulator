@@ -104,6 +104,26 @@ public:
         disk = newDisk;
         cout << "done\n";
     }
+    void crash(int n) {
+    for (int i = 0; i < n; i++) {
+        int x = rand() % totalBlocks;
+        bad[x] = true;
+        disk[x] = -2;
+    }
+    cout << "crashed\n";
+}
+void recover() {
+    for (auto &p : dir) {
+        vector<int> good;
+        for (int x : p.second.blocks) {
+            if (!bad[x] && disk[x] != -2) good.push_back(x);
+        }
+        p.second.blocks = good;
+    }
+    cout << "recovered\n";
+}
+
+
 
     void mapBlocks() {
         for (int i = 0; i < totalBlocks; i++) {
@@ -142,6 +162,13 @@ int main() {
             cin >> n;
             fs.readFile(n);
         }
+        else if (c == "crash") {
+        int n;
+        cin >> n;
+        fs.crash(n);
+    }
+else if (c == "recover") fs.recover();
+
         else if (c == "defrag") fs.defrag();
         else if (c == "map") fs.mapBlocks();
         else cout << "wrong command\n";
