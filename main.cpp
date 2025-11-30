@@ -46,4 +46,45 @@ public:
         }
         return {};
     }
+    void createFile(string name, int size) {
+        if (dir.count(name)) {
+            cout << "exists\n";
+            return;
+        }
+        auto b = allocate(size);
+        if (b.size() < size) {
+            cout << "no space\n";
+            return;
+        }
+        File f;
+        f.name = name;
+        f.size = size;
+        f.blocks = b;
+
+        int id = nextId++;
+        for (int x : b) disk[x] = id;
+
+        dir[name] = f;
+        cout << "created\n";
+    }
+
+    void deleteFile(string name) {
+        if (!dir.count(name)) {
+            cout << "no file\n";
+            return;
+        }
+        for (int x : dir[name].blocks) disk[x] = -1;
+        dir.erase(name);
+        cout << "deleted\n";
+    }
+
+    void readFile(string name) {
+        if (!dir.count(name)) {
+            cout << "no file\n";
+            return;
+        }
+        for (int x : dir[name].blocks) cout << x << " ";
+        cout << "\n";
+    }
+
 
