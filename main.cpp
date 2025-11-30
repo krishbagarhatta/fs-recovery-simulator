@@ -114,6 +114,42 @@ public:
         cout << "\n";
     }
 };
+int main() {
+    FileSystem fs(50);
+
+    cout << "Commands: status ls create delete read defrag map exit\n";
+
+    string c;
+    while (true) {
+        cout << "> ";
+        cin >> c;
+
+        if (c == "exit") break;
+        else if (c == "status") fs.status();
+        else if (c == "ls") fs.ls();
+        else if (c == "create") {
+            string n; int s;
+            cin >> n >> s;
+            fs.createFile(n, s);
+        }
+        else if (c == "delete") {
+            string n;
+            cin >> n;
+            fs.deleteFile(n);
+        }
+        else if (c == "read") {
+            string n;
+            cin >> n;
+            fs.readFile(n);
+        }
+        else if (c == "defrag") fs.defrag();
+        else if (c == "map") fs.mapBlocks();
+        else cout << "wrong command\n";
+    }
+
+    return 0;
+}
+
 
 
 
