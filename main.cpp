@@ -86,5 +86,34 @@ public:
         for (int x : dir[name].blocks) cout << x << " ";
         cout << "\n";
     }
+    void defrag() {
+        vector<int> newDisk(totalBlocks, -1);
+        int k = 0;
+
+        for (auto &p : dir) {
+            File &f = p.second;
+            vector<int> nb;
+            for (int x : f.blocks) {
+                newDisk[k] = disk[x];
+                nb.push_back(k);
+                k++;
+            }
+            f.blocks = nb;
+        }
+
+        disk = newDisk;
+        cout << "done\n";
+    }
+
+    void mapBlocks() {
+        for (int i = 0; i < totalBlocks; i++) {
+            if (disk[i] == -1) cout << i << ":free  ";
+            else cout << i << ":" << disk[i] << "  ";
+            if ((i + 1) % 10 == 0) cout << "\n";
+        }
+        cout << "\n";
+    }
+};
+
 
 
