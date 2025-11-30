@@ -10,16 +10,12 @@ struct File {
 class FileSystem {
     int totalBlocks;
     vector<int> disk;
-    vector<bool> bad;
-
     map<string, File> dir;
     int nextId;
 public:
     FileSystem(int blocks = 50) {
         totalBlocks = blocks;
         disk.assign(blocks, -1);
-        bad.assign(blocks, false);
-
         nextId = 1;
     }
     void status() {
