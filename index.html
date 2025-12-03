@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FileScape: File System Simulator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>FileScape</h1>
+      <p class="subtitle">File System Recovery & Optimization Simulator</p>
+    </header>
+
+    <div class="controls">
+      <button onclick="simulateDeletion()">🗑️ Delete Files</button>
+      <button onclick="simulateCorruption()">💥 Corrupt Disk</button>
+      <button onclick="recoverFiles()">🔍 Recover Files</button>
+      <button onclick="defrag()">⚡ Defragment</button>
+    </div>
+
+    <div class="disk" id="disk"></div>
+
+    <div class="stats">
+      <div class="stat-item">
+        <div>Healthy</div>
+        <div class="stat-value" id="healthyCount">60</div>
+      </div>
+      <div class="stat-item">
+        <div>Deleted</div>
+        <div class="stat-value" id="deletedCount">0</div>
+      </div>
+      <div class="stat-item">
+        <div>Corrupted</div>
+        <div class="stat-value" id="corruptedCount">0</div>
+      </div>
+      <div class="stat-item">
+        <div>Fragmentation</div>
+        <div class="stat-value" id="fragLevel">12%</div>
+      </div>
+    </div>
+
+    <div id="log">📁 File system loaded. Ready for simulation!</div>
+  </div>
+
+  <!-- ✅ SUCCESS POPUP MODAL -->
+  <div id="successModal">
+    <div class="modal-content">
+      <h2>✅ Recovery Complete!</h2>
+      <p>All deleted and corrupted files have been successfully recovered.</p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
